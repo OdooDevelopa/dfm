@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <menuitem id="disf_root_menu" name="DFM Config"
+                 action="dfm_config_settings_action" sequence="2"/>
+        <menuitem id="disf_mes_menu" name="DFM Mess"
+                 action="message_model_act" sequence="3"/>
+
+    </data>
+</odoo>

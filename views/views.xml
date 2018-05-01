@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data  noupdate="0">
+
+    <record id="cron_do_task" forcecreate='True' model="ir.cron">
+      <field name="name">Do -Task</field>
+      <field eval="True" name="active"/>
+      <field name="user_id" ref="base.user_root"/>
+      <field name="interval_number">1</field>
+      <field name="interval_type">minutes</field>
+      <field name="numbercall">-1</field>
+      <field name="model_id" ref="model_dfm_message"/>
+      <field name="state">code</field>
+      <field name="code">model.listen_to_message()</field>
+</record>
+
+
+       <record id="message_model" model="ir.ui.view">
+           <field name="name">dfm.message</field>
+           <field name="model">dfm.message</field>
+           <field name="arch" type="xml">
+               <form string="dfm.message">
+                 <header>
+                   <button name="get_message" type="object" string="get_message"/>
+                 </header>
+                   <sheet>
+                       <group>
+                           <field name="name"/>
+                           <field name="user"/>
+                           <field name="message"/>
+                       </group>
+                   </sheet>
+               </form>
+           </field>
+       </record>
+
+      <record id="message_model_act" model="ir.actions.act_window">
+          <field name="name">message_model_act</field>
+          <field name="type">ir.actions.act_window</field>
+          <field name="res_model">dfm.message</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+
+    </data>
+</odoo>
