@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
+import base64
 from odoo import models, fields, api
 from .dfm import Dlient
 
-
-CLIENT = None
-ENV = None
-LISTENING = False
+CLIENT, ENV, LISTENING = None, None, False
 
 
 class Message(models.Model):
@@ -22,7 +20,12 @@ class Message(models.Model):
         global ENV
         global LISTENING
         if not LISTENING:
-            CLIENT = Dlient("tienhieuD", "Anhla1203")
+            print('listen_to_message() '*200
+                  )
+            CLIENT = Dlient(
+                self.env['ir.config_parameter'].get_param('dfm.facebook_account'),
+                base64.b64decode(self.env['ir.config_parameter'].get_param('dfm.facebook_password').encode('ascii'))
+                    .decode('utf-8'))
             ENV = self.env
             LISTENING = True
             CLIENT.listen()
