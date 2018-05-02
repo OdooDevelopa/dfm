@@ -20,8 +20,6 @@ class Message(models.Model):
         global ENV
         global LISTENING
         if not LISTENING:
-            print('listen_to_message() '*200
-                  )
             CLIENT = Dlient(
                 self.env['ir.config_parameter'].get_param('dfm.facebook_account'),
                 base64.b64decode(self.env['ir.config_parameter'].get_param('dfm.facebook_password').encode('ascii'))
